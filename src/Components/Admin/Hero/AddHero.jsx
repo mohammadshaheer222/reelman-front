@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 import { MdAddToPhotos } from "react-icons/md";
 import { server } from "../../../../Server";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AddHero = () => {
   const [heroAvatar, setHeroAvatar] = useState([]);
   const [fileSelected, setFileSelected] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleHeroAvatar = (event) => {
     const file = event.target.files;
@@ -30,6 +33,7 @@ const AddHero = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     if (!fileSelected) {
       alert("Please select at least one file.");
@@ -47,8 +51,10 @@ const AddHero = () => {
     await axios
       .post(`${server}/create-slide`, newForm, config)
       .then((res) => {
+        setIsLoading(false);
         toast.success("Uploaded Successfully!!");
         setHeroAvatar("");
+        navigate("/reelman-admin")
       })
       .catch((error) =>
         console.log(
@@ -118,7 +124,7 @@ const AddHero = () => {
         </div>
         <input
           type="submit"
-          value="Submit"
+          value={isLoading ? "Uploading..." : "Upload"}
           className="w-[50%] bg-blue-500 text-white py-2 cursor-pointer"
         />
       </form>

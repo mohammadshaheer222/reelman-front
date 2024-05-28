@@ -7,6 +7,7 @@ const ListInsta = () => {
   const [link, setLink] = useState("");
   const [error, setError] = useState("");
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
     await axios
@@ -20,6 +21,7 @@ const ListInsta = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     if (!isValidInstagramLink(link)) {
       setError("Please enter a valid Instagram link.");
@@ -30,7 +32,7 @@ const ListInsta = () => {
     await axios
       .post(`${server}/create-insta`, { link })
       .then((res) => {
-        console.log(res);
+        setIsLoading(false);
         toast.success("Added Successfully!!!");
         window.location.reload();
       })
@@ -47,7 +49,7 @@ const ListInsta = () => {
     await axios
       .delete(`${server}/delete-insta/${id}`)
       .then((res) => {
-        alert("Are you want to delete this post?")
+        alert("Are you want to delete this post?");
         fetchData();
       })
       .catch((error) => toast.error(error.response.data.message));
@@ -71,7 +73,7 @@ const ListInsta = () => {
         </div>
         <div>
           <button type="submit" className="bg-blue-500 px-8 py-2 text-white">
-            Add
+            {isLoading ? "Adding.." : "Add"}
           </button>
         </div>
       </form>
@@ -96,7 +98,6 @@ const ListInsta = () => {
                 height="260"
                 frameBorder="0"
                 scrolling="no"
-                // allowTransparency="true"
                 style={{ position: "absolute", top: "-75px" }}
               />
             </div>

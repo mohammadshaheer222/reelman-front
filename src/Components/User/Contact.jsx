@@ -50,7 +50,7 @@ const Contact = () => {
   return (
     <div>
       <Parallax
-        strength={200}
+        strength={500}
         style={{
           minHeight: "100vh",
           height: "auto",

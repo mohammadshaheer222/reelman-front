@@ -7,14 +7,15 @@ import { Link, useNavigate } from "react-router-dom";
 const ListSlides = () => {
   const navigate = useNavigate();
   const [heroAvatar, setHeroAvatar] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchHeroData = async () => {
     await axios
-      .get(`${server}/get-slide`,{withCredentials: true})
+      .get(`${server}/get-slide`, { withCredentials: true })
       .then((res) => {
         setHeroAvatar(res.data.avatar);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => toast.error(error.response.data.message));
   };
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const ListSlides = () => {
 
   const handleHeroDelete = async (id) => {
     await axios
-      .delete(`${server}/delete-slide/${id}`,{withCredentials: true})
+      .delete(`${server}/delete-slide/${id}`, { withCredentials: true })
       .then((res) => {
         alert("Are you want to delete this photo?");
         fetchHeroData();
@@ -33,6 +34,7 @@ const ListSlides = () => {
 
   const handleHeroUpdateChange = async (id, event) => {
     const file = event.target.files[0];
+    setIsLoading(true);
 
     const config = {
       header: { "Content-Type": "multipart/form-data" },
@@ -43,6 +45,8 @@ const ListSlides = () => {
     await axios
       .patch(`${server}/update-slide/${id}`, newForm, config)
       .then((res) => {
+        setIsLoading(false);
+        toast.success("Updated Successfully!!");
         fetchHeroData();
       })
       .catch((error) => toast.error(error.response.data.message));
@@ -76,7 +80,7 @@ const ListSlides = () => {
                     className="ml- flex items-center justify-center px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white cursor-pointer hover:bg-gray-50"
                     htmlFor={`file-input-${hero._id}`}
                   >
-                    <span>Update</span>
+                    <span>{isLoading ? "Updating.." : "Update"}</span>
                     <input
                       type="file"
                       name="hero-avatar"

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 const ListMid = () => {
   const navigate = useNavigate();
   const [midAvatar, setMidAvatar] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchMidData = async () => {
     await axios
@@ -15,8 +16,7 @@ const ListMid = () => {
         setMidAvatar(res.data.avatar);
       })
       .catch((error) => {
-        console.log(error);
-        // navigate("/login");
+        toast.error(error.response.data.message);
       });
   };
 
@@ -26,6 +26,8 @@ const ListMid = () => {
 
   const handleMidUpdateChange = async (id, event) => {
     const file = event.target.files[0];
+    setIsLoading(true);
+
     const config = {
       header: { "Content-Type": "multipart/form-data" },
     };
@@ -36,6 +38,8 @@ const ListMid = () => {
     await axios
       .patch(`${server}/update-mid/${id}`, newForm, config)
       .then((res) => {
+        setIsLoading(false);
+        toast.success("Update Successfully");
         fetchMidData();
       })
       .catch((error) => toast.error(error.response.data.message));
@@ -79,7 +83,7 @@ const ListMid = () => {
                     className="ml- flex items-center justify-center px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white cursor-pointer hover:bg-gray-50"
                     htmlFor={`file-input-${mid._id}`}
                   >
-                    <span>Update</span>
+                    <span>{isLoading ? "Updating.." : "Update"}</span>
                     <input
                       type="file"
                       name="mid-avatar"

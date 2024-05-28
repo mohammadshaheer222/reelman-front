@@ -6,7 +6,7 @@ import { RxAvatar } from "react-icons/rx";
 
 const EditProduct = () => {
   const { id } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [groom, setGroom] = useState("");
   const [bride, setBride] = useState("");
   const [quote, setQuote] = useState("");
@@ -14,6 +14,7 @@ const EditProduct = () => {
   const [profileAvatar, setProfileAvatar] = useState(null);
   const [coverAvatar, setCoverAvatar] = useState(null);
   const [weddingAvatar, setWeddingAvatar] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchSingleData = async () => {
     await axios
@@ -65,6 +66,8 @@ const EditProduct = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
+
     const config = {
       headers: { "Content-Type": "multipart/form-data" },
     };
@@ -83,8 +86,12 @@ const EditProduct = () => {
 
     await axios
       .patch(`${server}/update-wedding/${id}`, newForm, config)
-      .then((res) => console.log(res))
-      .catch((error) => console.log(error));
+      .then((res) => {
+        setIsLoading(false);
+        toast.success("Update Successfully!!");
+        navigate("/reelman-admin/list-wedding");
+      })
+      .catch((error) => toast.error(error.response.data.message));
   };
 
   return (
@@ -259,7 +266,7 @@ const EditProduct = () => {
         </div>
         <input
           type="submit"
-          value="Update"
+          value={isLoading ? "Updating.." : "Update"}
           className="bg-blue-500 text-white w-full py-1 cursor-pointer hover:bg-blue-600 active:bg-blue-400"
         />
       </form>

@@ -9,7 +9,7 @@ const AddMid = () => {
   const navigate = useNavigate();
   const [midAvatar, setMidAvatar] = useState([]);
   const [fileSelected, setFileSelected] = useState(false);
- 
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleMidAvatar = (event) => {
     const file = event.target.files;
@@ -20,7 +20,7 @@ const AddMid = () => {
       toast.error("You can upload a maximum of 10 photos.");
       return;
     }
-    
+
     setMidAvatar((prev) => [...prev, ...fileArr]);
     setFileSelected(true);
   };
@@ -33,6 +33,7 @@ const AddMid = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true)
 
     if (!fileSelected) {
       alert("Please select at least one file.");
@@ -52,10 +53,16 @@ const AddMid = () => {
     await axios
       .post(`${server}/create-mid`, newForm, config)
       .then((res) => {
+        setIsLoading(false)
         toast.success("Uploaded Successfully!!!");
         setMidAvatar("");
+        navigate("/reelman-admin/list-mid")
       })
-      .catch((error) => toast.error("You can upload a maximum of 10 photos ,Delete photos in your list"));
+      .catch((error) =>
+        toast.error(
+          "You can upload a maximum of 10 photos ,Delete photos in your list"
+        )
+      );
   };
 
   return (
@@ -119,7 +126,7 @@ const AddMid = () => {
         </div>
         <input
           type="submit"
-          value="Submit"
+          value={isLoading ? "Uploading..." : "Upload"}
           className="w-[50%] bg-blue-500 text-white py-2 cursor-pointer"
         />
       </form>

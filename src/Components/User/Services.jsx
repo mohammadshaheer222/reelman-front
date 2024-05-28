@@ -49,7 +49,7 @@ const Services = () => {
           <div  className="relative">
             <Parallax
               className="md:h-[100vh]"
-              strength={200}
+              strength={500}
               style={{
                 minHeight: "90vh",
                 maxHeight: "100vh",

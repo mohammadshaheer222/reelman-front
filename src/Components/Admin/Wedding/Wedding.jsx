@@ -15,6 +15,7 @@ const Wedding = () => {
   const [profileAvatar, setProfileAvatar] = useState(null);
   const [gifAvatar, setGifAvatar] = useState(null);
   const [coverAvatar, setCoverAvatar] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleProfileChange = (event) => {
     const file = event.target.files[0];
@@ -43,6 +44,7 @@ const Wedding = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     const config = {
       headers: { "Content-Type": "multipart/form-data" },
@@ -53,7 +55,6 @@ const Wedding = () => {
       newForm.append("file", weddingAvatar[i]);
     }
 
-    console.log(gifAvatar);
     newForm.append("groom", groom);
     newForm.append("bride", bride);
     newForm.append("quote", quote);
@@ -65,6 +66,7 @@ const Wedding = () => {
     await axios
       .post(`${server}/create-wedding`, newForm, config)
       .then((res) => {
+        setIsLoading(false);
         toast.success("Upload Successfully!!");
         navigate("/reelman-admin/list-wedding");
       })
@@ -133,76 +135,71 @@ const Wedding = () => {
         </div>
 
         <div className="flex justify-center items-center gap-6">
-
-          {
-            gifAvatar >= 0 && (
-
-          <div className="mt-2 flex flex-col items-center ">
-            <label
-              className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300  shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-              htmlFor="profile-avatar"
-            >
-              <span className="text-center">Upload Your Profile Photo</span>
-              <input
-                type="file"
-                name="profile-avatar"
-                id="profile-avatar"
-                accept=".jpg,.jpeg,.heic,.png"
-                onChange={handleProfileChange}
-                className="sr-only"
-                required
-              />
-            </label>
-            <div className="pt-6 flex gap-4 flex-wrap justify-center items-center">
-              {profileAvatar ? (
-                <img
-                  className="h-24 w-24 object-cover"
-                  src={URL.createObjectURL(profileAvatar)}
-                  alt=""
-                  loading="lazy"
+          {gifAvatar >= 0 && (
+            <div className="mt-2 flex flex-col items-center ">
+              <label
+                className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300  shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                htmlFor="profile-avatar"
+              >
+                <span className="text-center">Upload Your Profile Photo</span>
+                <input
+                  type="file"
+                  name="profile-avatar"
+                  id="profile-avatar"
+                  accept=".jpg,.jpeg,.heic,.png"
+                  onChange={handleProfileChange}
+                  className="sr-only"
+                  required
                 />
-              ) : (
-                <RxAvatar className="h-24 w-24 text-gray-400" />
-              )}
+              </label>
+              <div className="pt-6 flex gap-4 flex-wrap justify-center items-center">
+                {profileAvatar ? (
+                  <img
+                    className="h-24 w-24 object-cover"
+                    src={URL.createObjectURL(profileAvatar)}
+                    alt=""
+                    loading="lazy"
+                  />
+                ) : (
+                  <RxAvatar className="h-24 w-24 text-gray-400" />
+                )}
+              </div>
             </div>
-          </div>
-            )
-          }
+          )}
 
-          {
-            profileAvatar >= 0 && (
-
-          <div className="mt-2 flex flex-col items-center ">
-            <label
-              className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300  shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-              htmlFor="gif-avatar"
-            >
-              <span className="text-center">Upload Your Gif Profile Photo</span>
-              <input
-                type="file"
-                name="gif-avatar"
-                id="gif-avatar"
-                accept=".jpg,.jpeg,.heic,.png"
-                onChange={handleGifChange}
-                className="sr-only"
-                required
-              />
-            </label>
-            <div className="pt-6 flex gap-4 flex-wrap justify-center items-center">
-              {gifAvatar ? (
-                <img
-                  className="h-24 w-24 object-cover"
-                  src={URL.createObjectURL(gifAvatar)}
-                  alt=""
-                  loading="lazy"
+          {profileAvatar >= 0 && (
+            <div className="mt-2 flex flex-col items-center ">
+              <label
+                className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300  shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                htmlFor="gif-avatar"
+              >
+                <span className="text-center">
+                  Upload Your Gif Profile Photo
+                </span>
+                <input
+                  type="file"
+                  name="gif-avatar"
+                  id="gif-avatar"
+                  accept=".jpg,.jpeg,.heic,.png"
+                  onChange={handleGifChange}
+                  className="sr-only"
+                  required
                 />
-              ) : (
-                <RxAvatar className="h-24 w-24 text-gray-400" />
-              )}
+              </label>
+              <div className="pt-6 flex gap-4 flex-wrap justify-center items-center">
+                {gifAvatar ? (
+                  <img
+                    className="h-24 w-24 object-cover"
+                    src={URL.createObjectURL(gifAvatar)}
+                    alt=""
+                    loading="lazy"
+                  />
+                ) : (
+                  <RxAvatar className="h-24 w-24 text-gray-400" />
+                )}
+              </div>
             </div>
-          </div>
-            )
-          }
+          )}
 
           <div className="mt-2 flex flex-col items-center">
             <label
@@ -253,7 +250,7 @@ const Wedding = () => {
             />
           </label>
           <div className="pt-6 flex gap-4 flex-wrap justify-center items-center">
-            {weddingAvatar.slice(0,5).map((avatar, index) => (
+            {weddingAvatar.slice(0, 5).map((avatar, index) => (
               <div className="flex flex-col gap-2">
                 <span
                   key={index}
@@ -282,8 +279,7 @@ const Wedding = () => {
         </div>
         <input
           type="submit"
-          name=""
-          id=""
+          value={isLoading ? "Submitting..." : "Submit"}
           className="bg-blue-500 text-white w-full py-1 cursor-pointer hover:bg-blue-600 active:bg-blue-400"
         />
       </form>
