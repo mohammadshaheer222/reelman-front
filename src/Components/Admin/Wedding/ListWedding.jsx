@@ -82,7 +82,6 @@ const ListWedding = () => {
                   loading="lazy"
                 />
               </td>
-              
               <td className="p-4 border border-black">
                 <div>{data.bride}</div>
               </td>

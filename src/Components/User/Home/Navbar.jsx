@@ -73,7 +73,7 @@ const Navbar = () => {
           </Link>
           <div className="flex items-center gap-3">
             <a
-              href="https://wa.me/7561847879?text=Hello"
+              href="https://wa.me/9895943440?text=Hei"
               className="font-medium text-sm tracking-wide cursor-pointer block md:hidden"
             >
               [LET'S CHAT]
@@ -151,13 +151,6 @@ const Navbar = () => {
                 onClick={closeMenu}
               >
                 About
-              </Link>
-              <Link
-                to="/service"
-                className="hover:text-gray-600 uppercase"
-                onClick={closeMenu}
-              >
-                Service
               </Link>
               <Link
                 to="/wedding"

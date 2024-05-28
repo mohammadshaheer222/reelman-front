@@ -20,7 +20,7 @@ const WeddingContent = ({ wedding }) => {
         <span className="uppercase font-medium">{wedding.groom}</span>
       </p> */}
         <p className="capitalize font-medium text-lg py-2 ">
-          {wedding.bride} and {wedding.groom}
+          {wedding.groom} and {wedding.bride}
         </p>
       </Link>
     </div>

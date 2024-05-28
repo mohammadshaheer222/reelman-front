@@ -6,7 +6,7 @@ const ParalFoto = () => {
     <div className="pb-4 pt-4 md:h-[90vh]">
       <Parallax
         className="md:h-full"
-        strength={500}
+        strength={100}
         style={{
           minHeight: "50vh",
           maxHeight: "100vh",

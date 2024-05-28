@@ -24,6 +24,7 @@ import ListInsta from "./Components/Admin/Instagram/ListInsta";
 import ServicePage from "./Pages/UserPage/ServicePage";
 import AuthContextProvider from "./Components/Admin/Context/AuthContext";
 import PrivateRoute from "./Components/Admin/PrivateRoute";
+import AboutPage from "./Pages/UserPage/AboutPage";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Navbar />}>
           <Route index element={<HomePage />} />
+          <Route path="about" element={<AboutPage />}/>
           <Route path="service" element={<ServicePage />} />
           <Route path="wedding" element={<WeddingPage />} />
           <Route path="details/:weddingId" element={<DetailsPage />} />

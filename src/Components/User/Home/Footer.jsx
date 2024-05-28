@@ -6,7 +6,7 @@ import logo from "/src/assets/images/logo.png";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const phoneNumber = "+919895943440";
-  const email = "mohammadshaheer222@gmail.com"
+  const email = "reelmanproduction@gmail.com"
   return (
     <div className="px-6 text-black bg-gray-100 py-10 flex flex-col justify-center items-center md:flex-row md:items-start md:gap-x-20">
       <div className="flex flex-col justify-center items-center gap-2">
