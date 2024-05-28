@@ -1,0 +1,80 @@
+@media screen and (min-width: 375px) and (max-width: 425px) {
+  .about-img1 {
+    width: 9rem;
+    height: 9rem;
+  }
+  .about-img2 {
+    width: 9rem;
+    height: 9rem;
+  }
+}
+@media screen and (min-width: 425px) and (max-width: 450px) {
+  .about-img1 {
+    width: 11rem;
+    height: 11rem;
+  }
+  .about-img2 {
+    width: 11rem;
+    height: 11rem;
+  }
+}
+@media screen and (min-width: 450px) and (max-width: 485px) {
+  .about-img1 {
+    width: 12rem;
+    height: 12rem;
+  }
+  .about-img2 {
+    width: 12rem;
+    height: 12rem;
+  }
+}
+@media screen and (min-width: 485px) and (max-width: 550px) {
+  .about-img1 {
+    width: 13rem;
+    height: 13rem;
+  }
+  .about-img2 {
+    width: 13rem;
+    height: 13rem;
+  }
+}
+/* @media screen and (min-width: 500px) and (max-width: 550px) {
+    .about-img1 {
+        width: 13.5rem;
+        height: 13.5rem;
+    }
+    .about-img2 {
+        width: 13.5rem;
+        height: 13.5rem;
+    }
+  } */
+@media screen and (min-width: 550px) and (max-width: 600px) {
+  .about-img1 {
+    width: 14rem;
+    height: 14rem;
+  }
+  .about-img2 {
+    width: 14rem;
+    height: 14rem;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 640px) {
+  .about-img1 {
+    width: 15rem;
+    height: 15rem;
+  }
+  .about-img2 {
+    width: 15rem;
+    height: 15rem;
+  }
+}
+
+.instagram-media {
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+.instagram-media .header,
+.instagram-media .footer {
+  display: none !important;
+}
