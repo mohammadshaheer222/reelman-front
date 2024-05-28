@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { MdMenu, MdClose } from "react-icons/md";
 import Sidebar from "./Sidebar";
+import { AuthContext } from "../Context/AuthContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [color, setColor] = useState(false);
-  
+  const { logout } = useContext(AuthContext);
 
   const changeColor = () => {
     window.scrollY >= 90 ? setColor(true) : setColor(false);
@@ -19,6 +20,15 @@ const Navbar = () => {
 
   const closeMenu = () => {
     setIsOpen(false);
+  };
+
+  
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   return (
@@ -35,7 +45,7 @@ const Navbar = () => {
           </p>
         </div>
         <div>Admin Panel</div>
-        <button className="bg-blue-500 text-white px-4">Logout</button>
+        <button onClick={handleLogout} className="bg-blue-500 text-white px-4">Logout</button>
       </nav>
       <Sidebar isOpen={isOpen} closeMenu={closeMenu} />
       <Outlet />
