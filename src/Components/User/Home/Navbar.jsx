@@ -153,6 +153,13 @@ const Navbar = () => {
                 About
               </Link>
               <Link
+                to="/service"
+                className="hover:text-gray-600 uppercase"
+                onClick={closeMenu}
+              >
+                Service
+              </Link>
+              <Link
                 to="/wedding"
                 className="hover:text-gray-600 uppercase"
                 onClick={closeMenu}
