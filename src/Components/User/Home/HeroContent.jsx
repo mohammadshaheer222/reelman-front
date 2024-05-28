@@ -13,7 +13,7 @@ const HeroContent = ({ images }) => {
       >
         <Background className="custom-bg w-screen h-screen">
           <img
-            src={`http://localhost:2000/uploads/${images}`}
+            src={`https://reelman-back.onrender.com/uploads/${images}`}
             alt="Hero images"
             className="object-cover object-center w-full h-full"
             loading="lazy"

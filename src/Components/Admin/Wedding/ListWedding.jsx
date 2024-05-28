@@ -60,7 +60,7 @@ const ListWedding = () => {
             <tr key={data._id}rs>
               <td className="p-4 border border-black">
                 <img
-                  src={`http://localhost:2000/uploads/${data.profile}`}
+                  src={`https://reelman-back.onrender.com/uploads/${data.profile}`}
                   alt="profile image"
                   width={50}
                   loading="lazy"
@@ -68,7 +68,7 @@ const ListWedding = () => {
               </td>
               <td className="p-4 border border-black">
                 <img
-                  src={`http://localhost:2000/uploads/${data.gif}`}
+                  src={`https://reelman-back.onrender.com/uploads/${data.gif}`}
                   alt="profile image"
                   width={50}
                   loading="lazy"
@@ -76,25 +76,13 @@ const ListWedding = () => {
               </td>
               <td className="p-4 border border-black">
                 <img
-                  src={`http://localhost:2000/uploads/${data.cover}`}
+                  src={`https://reelman-back.onrender.com/uploads/${data.cover}`}
                   alt="cover image"
                   width={50}
                   loading="lazy"
                 />
               </td>
-              {/* <td className="p-4 border border-black">
-                <div className="flex flex-wrap justify-center items-center gap-2">
-                  {data.weddingAvatar.map((image, index) => (
-                    <img
-                      key={index}
-                      width={50}
-                      src={`http://localhost:2000/uploads/${image}`}
-                      alt=""
-                      loading="lazy"
-                    />
-                  ))}
-                </div>
-              </td> */}
+              
               <td className="p-4 border border-black">
                 <div>{data.bride}</div>
               </td>

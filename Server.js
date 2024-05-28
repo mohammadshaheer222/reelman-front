@@ -1,1 +1,1 @@
-export const server = "http://localhost:2000/api/v2"
+export const server = "https://reelman-back.onrender.com/api/v2";

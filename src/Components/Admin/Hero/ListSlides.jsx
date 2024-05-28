@@ -63,7 +63,7 @@ const ListSlides = () => {
                   <p>{index + 1}</p>
                   <img
                     className="w-24 h-24"
-                    src={`http://localhost:2000/uploads/${hero.heroAvatar}`}
+                    src={`https://reelman-back.onrender.com/uploads/${hero.heroAvatar}`}
                     alt=""
                   />
                   <button

@@ -8,7 +8,7 @@ const WeddingContent = ({ wedding }) => {
         <div className="overflow-hidden">
           <img
             className="object-cover object-center h-[28rem] w-full hover:scale-105 transition-all duration-700"
-            src={`http://localhost:2000/uploads/${wedding.profile}`}
+            src={`https://reelman-back.onrender.com/uploads/${wedding.profile}`}
             alt="wedding photo"
             loading="lazy"
           />

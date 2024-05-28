@@ -66,7 +66,7 @@ const ListMid = () => {
                   <p>{index + 1}</p>
                   <img
                     className="w-24 h-24"
-                    src={`http://localhost:2000/uploads/${mid.midAvatar}`}
+                    src={`https://reelman-back.onrender.com/uploads/${mid.midAvatar}`}
                     alt=""
                   />
                   <button

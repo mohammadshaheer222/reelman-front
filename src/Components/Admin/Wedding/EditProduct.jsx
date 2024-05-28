@@ -170,7 +170,7 @@ const EditProduct = () => {
                   src={
                     profileAvatar instanceof File
                       ? URL.createObjectURL(profileAvatar)
-                      : `http://localhost:2000/uploads/${profileAvatar}`
+                      : `https://reelman-back.onrender.com/uploads/${profileAvatar}`
                   }
                   alt="Profile Avatar"
                 />
@@ -202,7 +202,7 @@ const EditProduct = () => {
                   src={
                     coverAvatar instanceof File
                       ? URL.createObjectURL(coverAvatar)
-                      : `http://localhost:2000/uploads/${coverAvatar}`
+                      : `https://reelman-back.onrender.com/uploads/${coverAvatar}`
                   }
                   alt="Cover Avatar"
                 />
@@ -239,7 +239,7 @@ const EditProduct = () => {
                     src={
                       avatar instanceof File
                         ? URL.createObjectURL(avatar)
-                        : `http://localhost:2000/uploads/${avatar}`
+                        : `https://reelman-back.onrender.com/uploads/${avatar}`
                     }
                   />
                 </span>
