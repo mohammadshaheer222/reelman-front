@@ -6,8 +6,6 @@ import DetailsPage from "./Pages/UserPage/DetailsPage";
 import HomePage from "./Pages/UserPage/HomePage";
 import WeddingPage from "./Pages/UserPage/WeddingPage";
 import LoginPage from "./Pages/AdminPage/LoginPage";
-import DashBoardPage from "./Pages/AdminPage/DashBoardPage";
-import ListSlide from "./Components/Admin/Hero/ListSlides";
 import AddMid from "./Components/Admin/Mid/AddMid";
 import AddHero from "./Components/Admin/Hero/AddHero";
 import Wedding from "./Components/Admin/Wedding/Wedding";
@@ -25,14 +23,11 @@ import ServicePage from "./Pages/UserPage/ServicePage";
 import AuthContextProvider from "./Components/Admin/Context/AuthContext";
 import PrivateRoute from "./Components/Admin/PrivateRoute";
 import AboutPage from "./Pages/UserPage/AboutPage";
-import ListService from "./Components/Admin/Service/ListService";
-import AddService from "./Components/Admin/Service/AddService";
-import EditService from "./Components/Admin/Service/EditService";
+import ListService from "./Components/Admin/Servic/ListService";
+import AddService from "./Components/Admin/Servic/AddService";
+import EditService from "./Components/Admin/Servic/EditService";
 import ListAbout from "./Components/Admin/About/Details/ListAbout";
 import AddDetails from "./Components/Admin/About/Details/AddDetails";
-import { useState } from "react";
-import { useEffect } from "react";
-import Loader from "./Components/Loader/Loader";
 import EditDetails from "./Components/Admin/About/Details/EditDetails";
 
 const App = () => {
