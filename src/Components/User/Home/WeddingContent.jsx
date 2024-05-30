@@ -13,14 +13,11 @@ const WeddingContent = ({ wedding }) => {
             loading="lazy"
           />
         </div>
-        {/* <p className="heading text-center tracking-tight font-extralight block text-md md:text-lg capitalize">
-        {wedding.quote}
-          <br />
-        <span className="uppercase font-medium">{wedding.bride}</span> and{" "}
-        <span className="uppercase font-medium">{wedding.groom}</span>
-      </p> */}
-        <p className="capitalize font-medium text-lg py-2 ">
-          {wedding.groom} and {wedding.bride}
+        <p></p>
+        <p className="capitalize font-medium text-xl py-2 ">
+          "{wedding.quote}-" <br />
+          <span className="text-gray-700">{wedding.groom} and {wedding.bride}</span>
+          
         </p>
       </Link>
     </div>

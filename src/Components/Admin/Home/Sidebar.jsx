@@ -63,7 +63,7 @@ const Sidebar = ({ isOpen, closeMenu }) => {
           </div>
 
           <div>
-            <Link to="/reelman-admin/list-insta" onClick={closeMenu}>
+            <Link to="/reelman-admin/list-service" onClick={closeMenu}>
               <button className="flex items-center gap-x-2 focus:outline-none">
                 <MdHome />
                 Services
@@ -77,23 +77,23 @@ const Sidebar = ({ isOpen, closeMenu }) => {
               onClick={() => toggleDropdown("instagram")}
             >
               <MdHome />
-              Instagram
+              About
             </button>
             {isDropdownOpen.instagram && (
               <div className="absolute top-0 left-0 mt-10 bg-white border border-gray-200 shadow-md">
                 <Link
                   onClick={closeMenu}
-                  to="/add-photos"
+                  to="/reelman-admin/list-about"
                   className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                 >
-                  Add Photos
+                  Details
                 </Link>
                 <Link
                   onClick={closeMenu}
                   to="/list-photos"
                   className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                 >
-                  List Photos
+                  Team
                 </Link>
               </div>
             )}

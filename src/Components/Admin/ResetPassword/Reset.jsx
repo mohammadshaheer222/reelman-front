@@ -96,7 +96,7 @@ const Reset = () => {
           <input
             type="submit"
             value="Reset"
-            className="bg-black text-white w-full py-2 cursor-pointer"
+            className="bg-black text-white w-full py-2 cursor-pointer active:scale-95 active:shadow-lg duration-100"
           />
         </div>
       </form>

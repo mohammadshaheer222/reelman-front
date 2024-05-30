@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdAddToPhotos } from "react-icons/md";
 import { server } from "../../../../Server";
 import { toast } from "react-toastify";
@@ -57,7 +57,7 @@ const AddHero = () => {
         navigate("/reelman-admin")
       })
       .catch((error) =>
-        console.log(
+        toast.error(
           "You can upload a maximum of 4 photos ,Delete photos in your list"
         )
       );
@@ -79,7 +79,7 @@ const AddHero = () => {
             className="flex flex-col justify-center h-full items-center"
           >
             <div className="py-6">
-              <span className="bg-green-500 w-full text-white px-4 py-2 cursor-pointer ">
+              <span className="bg-green-500 w-full text-white px-4 py-2 cursor-pointer active:scale-95 active:shadow-lg duration-100">
                 Browse Your Photos
               </span>
               <input
@@ -106,7 +106,7 @@ const AddHero = () => {
                       alt={index}
                     />
                     <button
-                      className="bg-red-500 text-white"
+                      className="bg-red-500 text-white active:scale-95 active:shadow-lg duration-100 cursor-pointer"
                       onClick={() => handleDelete(index)}
                     >
                       Delete
@@ -125,7 +125,7 @@ const AddHero = () => {
         <input
           type="submit"
           value={isLoading ? "Uploading..." : "Upload"}
-          className="w-[50%] bg-blue-500 text-white py-2 cursor-pointer"
+          className="w-[50%] bg-blue-500 text-white py-2 cursor-pointer active:scale-95 active:shadow-lg duration-100"
         />
       </form>
     </div>

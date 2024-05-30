@@ -81,7 +81,7 @@ const AddMid = () => {
             className="flex flex-col justify-center h-full items-center"
           >
             <div className="py-6">
-              <span className="bg-green-500 w-full text-white px-4 py-2 cursor-pointer ">
+              <span className="bg-green-500 w-full text-white px-4 py-2 cursor-pointer active:scale-95 active:shadow-lg duration-100">
                 Browse Your Photos
               </span>
               <input
@@ -108,7 +108,7 @@ const AddMid = () => {
                       alt={index}
                     />
                     <button
-                      className="bg-red-500 text-white"
+                      className="bg-red-500 text-white active:scale-95 active:shadow-lg duration-100 cursor-pointer"
                       onClick={() => handleDelete(index)}
                     >
                       Delete
@@ -127,7 +127,7 @@ const AddMid = () => {
         <input
           type="submit"
           value={isLoading ? "Uploading..." : "Upload"}
-          className="w-[50%] bg-blue-500 text-white py-2 cursor-pointer"
+          className="w-[50%] bg-blue-500 text-white py-2 cursor-pointer active:scale-95 active:shadow-lg duration-100"
         />
       </form>
     </div>

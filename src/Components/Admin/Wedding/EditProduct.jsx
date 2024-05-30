@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { server } from "../../../../Server";
 import { RxAvatar } from "react-icons/rx";
+import { toast } from "react-toastify";
 
 const EditProduct = () => {
   const { id } = useParams();
@@ -30,7 +31,6 @@ const EditProduct = () => {
       })
       .catch((error) => {
         console.log(error);
-        // navigate("/login")
       });
   };
 
@@ -88,7 +88,7 @@ const EditProduct = () => {
       .patch(`${server}/update-wedding/${id}`, newForm, config)
       .then((res) => {
         setIsLoading(false);
-        toast.success("Update Successfully!!");
+        toast.success("Updated Successfully!!");
         navigate("/reelman-admin/list-wedding");
       })
       .catch((error) => toast.error(error.response.data.message));
@@ -157,7 +157,7 @@ const EditProduct = () => {
         <div className="flex justify-center items-center gap-6">
           <div className="mt-2 flex flex-col items-center ">
             <label
-              className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300  shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+              className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300  shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 active:scale-95 active:shadow-lg duration-100"
               htmlFor="profile-avatar"
             >
               <span className="text-center">Upload Your Profile Photo</span>
@@ -189,7 +189,7 @@ const EditProduct = () => {
 
           <div className="mt-2 flex flex-col items-center">
             <label
-              className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300  shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 "
+              className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300  shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 active:scale-95 active:shadow-lg duration-100"
               htmlFor="cover-avatar"
             >
               <span className="text-center">Upload Your Cover Photo</span>
@@ -222,7 +222,7 @@ const EditProduct = () => {
 
         <div className="mt-2 flex flex-col items-center w-full">
           <label
-            className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300  shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 w-full"
+            className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300  shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 w-full active:scale-95 active:shadow-lg duration-100"
             htmlFor="file-input"
           >
             <span>Upload Your Wedding photos</span>
@@ -246,13 +246,13 @@ const EditProduct = () => {
                     src={
                       avatar instanceof File
                         ? URL.createObjectURL(avatar)
-                        : `https://reelman-back.onrender.com/uploads/${avatar}`
+                        : `https://reelman-back.onrender.com0/uploads/${avatar}`
                     }
                   />
                 </span>
                 <button
                   type="button"
-                  className="bg-red-500 text-white"
+                  className="bg-red-500 text-white active:scale-95 active:shadow-lg duration-100"
                   onClick={() => handleDelete(index)}
                 >
                   Delete
@@ -267,7 +267,7 @@ const EditProduct = () => {
         <input
           type="submit"
           value={isLoading ? "Updating.." : "Update"}
-          className="bg-blue-500 text-white w-full py-1 cursor-pointer hover:bg-blue-600 active:bg-blue-400"
+          className="bg-blue-500 text-white w-full py-1 cursor-pointer hover:bg-blue-600 active:bg-blue-400 active:scale-95 active:shadow-lg duration-100"
         />
       </form>
     </div>

@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const ListWedding = () => {
-  const navigate = useNavigate();
   const [weddingData, setWeddingData] = useState([]);
 
   const fetchData = async () => {
@@ -16,7 +15,6 @@ const ListWedding = () => {
       .then((res) => setWeddingData(res.data.wedding))
       .catch((error) => {
         console.log(error);
-        // navigate("/login")
       });
   };
 
@@ -37,11 +35,11 @@ const ListWedding = () => {
   return (
     <div className="py-20 h-screen overflow-auto px-4 md:px-2 text-center space-y-4">
       <Link to="/reelman-admin/add-wedding">
-        <button className="bg-blue-500 text-white px-6 py-2">
+        <button className="bg-blue-500 text-white px-6 py-2 active:scale-95 active:shadow-lg duration-100">
           Add Wedding
         </button>
       </Link>
-      <table className="w-full mx-auto border-2">
+      <table className="w-full mx-auto">
         <thead>
           <tr className="text-start py-12 bg-black text-white">
             <th className="p-2 border-2">Profile (Image)</th>
@@ -98,13 +96,13 @@ const ListWedding = () => {
                 <div className="flex justify-center items-center gap-2 p-4 ">
                   <Link
                     to={`/reelman-admin/edit-wedding/${data._id}`}
-                    className="bg-blue-500 text-white px-6 py-1 "
+                    className="bg-blue-500 text-white px-6 py-1 cursor-pointer active:scale-95 active:shadow-lg duration-100"
                   >
                     Edit
                   </Link>
                   <button
                     onClick={() => handleDelete(data._id)}
-                    className="bg-red-500 text-white px-6 py-1"
+                    className="bg-red-500 text-white px-6 py-1 cursor-pointer active:scale-95 active:shadow-lg duration-100"
                   >
                     Delete
                   </button>

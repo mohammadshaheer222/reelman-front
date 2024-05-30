@@ -1,52 +1,30 @@
-// import Marquee from "react-fast-marquee";
 import { Background, Parallax } from "react-parallax";
-import insta1 from "/src/assets/images/carousel/carousel1.jpg";
-// import wedding1 from "/src/assets/images/work/gal-1.jpg";
-// import wedding2 from "/src/assets/images/work/gal-3.jpg";
-import wedding3 from "/src/assets/images/wedding3.jpg";
-import wedding4 from "/src/assets/images/wedding4.jpg";
-import image2 from "/src/assets/images/carousel/carousel4.jpg";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { server } from "../../../Server";
 
 const Services = () => {
-  const videos = [
-    {
-      video: image2,
-      service: "Weddings",
-    },
-    {
-      video: insta1,
-      service: "Engagement Shoots",
-    },
-    {
-      video: wedding3,
-      service: "Brand Concept Shoots",
-    },
-    {
-      video: wedding4,
-      service: "New Born Portraiture",
-    },
-  ];
-  return (
-    // <div className="py-4">
-    //   <Marquee speed={20} pauseOnHover={true}>
-    //     <div className="ml-6">
-    //       <div className="flex gap-x-6 text-xl font-medium cursor-pointer md:text-4xl md:gap-x-12 overflow-hidden">
-    //         <h3 >Wedding</h3>
-    //         <h3>Brand Concept Shoot</h3>
-    //         <h3>Engagement Shoot</h3>
-    //         <h3>Corporate Events</h3>
-    //         <h3>NewBorn Portraiture</h3>
-    //       </div>
-    //     </div>
-    //   </Marquee>
-    // </div>
+  const [service, setService] = useState([]);
 
-    <div className="py-20 px-8">
-      <h1 className="heading pb-4">Our Services</h1>
-      {videos.map((video, index) => (
-        <Link to="/details" key={index}>
-          <div  className="relative">
+  const fetchData = async () => {
+    await axios
+      .get(`${server}/get-service`)
+      .then((res) => {
+        setService(res.data.service);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      <div className="py-20 px-8">
+        <h1 className="heading pb-4">Our Services</h1>
+        {service.map((data) => (
+          <div className="relative" key={data._id}>
             <Parallax
               className="md:h-[100vh]"
               strength={500}
@@ -59,8 +37,8 @@ const Services = () => {
             >
               <Background className="custom-bg w-screen">
                 <img
-                  src={video.video}
-                  alt=""
+                  src={`https://reelman-back.onrender.com/uploads/${data.image}`}
+                  alt="service image"
                   className="h-[100vh] w-full object-cover object-center"
                   loading="eager"
                 />
@@ -70,20 +48,14 @@ const Services = () => {
             <div className="absolute top-0 w-full h-full flex justify-center items-center sm:justify-start px-6 ">
               <div className="space-y-4 sm:max-w-2xl">
                 <h1 className="text-4xl font-bold text-white">
-                  {video.service}
+                  {data.category}
                 </h1>
-                <p className="text-white">
-                  Magic Motion Media Has Created A New Exclusive Idea Of Concept
-                  Shoots, Developed And Personalised Only For A Particular
-                  Couple Or Brand. The Secret To Its Success? The Special
-                  Emotional Bond And Relationship With The Concept, And Our
-                  Client Is The Key To Our Concept Shoots.
-                </p>
+                <p className="text-white">{data.description}</p>
               </div>
             </div>
           </div>
-        </Link>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 
 const DetailsHd = ({ singleWedding }) => {
   return (
-    <div className="px-8 space-y-4 py-4">
+    <div className="px-8 space-y-4 py-4 flex flex-col justify-center items-center">
       <h1 className="text-4xl">
         {singleWedding.groom} and {singleWedding.bride}
       </h1>

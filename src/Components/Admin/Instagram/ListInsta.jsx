@@ -72,7 +72,7 @@ const ListInsta = () => {
           {error && <p className="text-red-500 text-sm">{error}</p>}
         </div>
         <div>
-          <button type="submit" className="bg-blue-500 px-8 py-2 text-white">
+          <button type="submit" className="bg-blue-500 px-8 py-2 text-white active:scale-95 active:shadow-lg duration-100">
             {isLoading ? "Adding.." : "Add"}
           </button>
         </div>
@@ -104,7 +104,7 @@ const ListInsta = () => {
             <div className="w-full flex justify-center">
               <button
                 onClick={() => handleDelete(data._id)}
-                className="bg-red-500 text-white w-1/2"
+                className="bg-red-500 text-white w-1/2 active:scale-95 active:shadow-lg duration-100"
               >
                 Delete
               </button>

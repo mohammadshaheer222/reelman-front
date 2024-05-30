@@ -69,7 +69,7 @@ const Navbar = () => {
           }`}
         >
           <Link to="/" className="uppercase cursor-pointer">
-            <img src={logo} alt="logo" width={50}/>
+            <img src={logo} alt="logo" width={70} />
           </Link>
           <div className="flex items-center gap-3">
             <a
@@ -93,35 +93,35 @@ const Navbar = () => {
             </Link>
             <Link
               to="/about"
-              className="hover:text-gray-400"
+              className="hover:text-gray-100"
               onClick={closeMenu}
             >
               About
             </Link>
             <Link
               to="/service"
-              className="hover:text-gray-400"
+              className="hover:text-gray-100"
               onClick={closeMenu}
             >
               Service
             </Link>
             <Link
               to="/wedding"
-              className="hover:text-gray-400"
+              className="hover:text-gray-100"
               onClick={closeMenu}
             >
               Wedding
             </Link>
             <Link
               to="/contact"
-              className="hover:text-gray-400"
+              className="hover:text-gray-100"
               onClick={closeMenu}
             >
               Contact
             </Link>
             <a
               href="https://wa.me/7561847879?text=Hello"
-              className="font-medium hover:text-gray-400 text-lg tracking-wide cursor-pointer hidden md:block "
+              className="font-medium hover:text-gray-100 text-lg tracking-wide cursor-pointer hidden md:block "
             >
               [LET'S CHAT]
             </a>
@@ -140,35 +140,35 @@ const Navbar = () => {
             >
               <Link
                 to="/"
-                className="hover:text-gray-600 uppercase"
+                className="hover:text-gray-100 uppercase"
                 onClick={closeMenu}
               >
                 Home
               </Link>
               <Link
                 to="/about"
-                className="hover:text-gray-600 uppercase"
+                className="hover:text-gray-100 uppercase"
                 onClick={closeMenu}
               >
                 About
               </Link>
               <Link
                 to="/service"
-                className="hover:text-gray-600 uppercase"
+                className="hover:text-gray-100 uppercase"
                 onClick={closeMenu}
               >
                 Service
               </Link>
               <Link
                 to="/wedding"
-                className="hover:text-gray-600 uppercase"
+                className="hover:text-gray-100 uppercase"
                 onClick={closeMenu}
               >
                 Wedding
               </Link>
               <Link
                 to="/contact"
-                className="hover:text-gray-600 uppercase"
+                className="hover:text-gray-100 uppercase"
                 onClick={closeMenu}
               >
                 Contact

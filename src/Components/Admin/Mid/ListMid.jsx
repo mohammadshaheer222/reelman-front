@@ -74,13 +74,13 @@ const ListMid = () => {
                     alt=""
                   />
                   <button
-                    className="bg-red-500 text-white w-full"
+                    className="bg-red-500 text-white w-full active:scale-95 active:shadow-lg duration-100 cursor-pointer"
                     onClick={() => handleMidDelete(mid._id)}
                   >
                     Delete
                   </button>
                   <label
-                    className="ml- flex items-center justify-center px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white cursor-pointer hover:bg-gray-50"
+                    className="ml- flex items-center justify-center px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white cursor-pointer hover:bg-gray-50 active:scale-95 active:shadow-lg duration-100"
                     htmlFor={`file-input-${mid._id}`}
                   >
                     <span>{isLoading ? "Updating.." : "Update"}</span>
