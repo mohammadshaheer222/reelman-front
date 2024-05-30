@@ -41,7 +41,7 @@ const MidSection = () => {
         {carousel.map((images) => (
           <div className="h-screen w-screen" key={images._id}>
             <img
-              src={`https://reelman-back.onrender.com0/uploads/${images.midAvatar}`}
+              src={`https://reelman-back.onrender.com/uploads/${images.midAvatar}`}
               alt="reelman photos"
               className="w-full h-full object-cover"
               style={{ objectPosition: "center" }}
