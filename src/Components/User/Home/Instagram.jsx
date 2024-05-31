@@ -11,9 +11,10 @@ import { server } from "../../../../Server";
 
 const Instagram = () => {
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
+    setIsLoading(true);
     await axios
       .get(`${server}/get-insta`)
       .then((res) => setData(res.data.insta))
@@ -26,7 +27,7 @@ const Instagram = () => {
 
   return (
     <div className="px-8">
-      {isLoading ? <h1 className="heading pb-4">Instagram</h1> :  null}
+      {isLoading ? <h1 className="heading pb-4">Instagram</h1> : null}
       {/* <h1 className="heading pb-2">Instagram</h1> */}
       <div className="flex justify-center items-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 h-full w-full  pt-2 gap-4 ">
@@ -49,7 +50,8 @@ const Instagram = () => {
                   position: "relative",
                 }}
               >
-                <iframe className="w-full"
+                <iframe
+                  className="w-full"
                   src={`${data.link}embed/`}
                   title="Instagram Post"
                   // width="328"
@@ -59,7 +61,7 @@ const Instagram = () => {
                   // allowTransparency="true"
                   style={{ position: "absolute", top: "-75px" }}
                 />
-                 {/* <div className="scale-0 group-hover:scale-100 duration-500 absolute top-0 flex justify-center items-center h-full w-full">
+                {/* <div className="scale-0 group-hover:scale-100 duration-500 absolute top-0 flex justify-center items-center h-full w-full">
                 <FaInstagram
                   size={20}
                   className=" text-white scale-125 hover:rotate-90 transition-all duration-500 md:w-52"
@@ -67,8 +69,6 @@ const Instagram = () => {
               </div> */}
               </div>
               {/* <div className="overlay absolute top-0 left-0 w-full h-full bg-white opacity-0 transition-opacity duration-500 group-hover:opacity-50"></div> */}
-
-             
             </div>
           ))}
         </div>

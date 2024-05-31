@@ -8,7 +8,7 @@ const Wedding = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
-    // setIsLoading(true);
+    setIsLoading(true);
     await axios
       .get(`${server}/latest-wedding`)
       .then((res) => {
