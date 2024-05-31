@@ -30,6 +30,7 @@ import ListAbout from "./Components/Admin/About/Details/ListAbout";
 import AddDetails from "./Components/Admin/About/Details/AddDetails";
 import EditDetails from "./Components/Admin/About/Details/EditDetails";
 import { LoadingProvider, useLoading } from "./Components/User/LoadingContext";
+import { useEffect } from "react";
 
 const App = () => {
   return (
