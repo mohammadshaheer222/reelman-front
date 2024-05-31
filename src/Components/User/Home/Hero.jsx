@@ -9,15 +9,12 @@ import { toast } from "react-toastify";
 
 const Hero = () => {
   const [carousel, setCarousel] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
-    setIsLoading(true);
     await axios
       .get(`${server}/get-slide`)
       .then((res) => {
         setCarousel(res.data.avatar);
-        setIsLoading(false);
       })
       .catch((error) => toast.error(error.response.data.message));
   };
