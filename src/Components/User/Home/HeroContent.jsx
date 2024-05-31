@@ -16,7 +16,7 @@ const HeroContent = ({ images }) => {
             src={`https://reelman-back.onrender.com/uploads/${images}`}
             alt="Hero images"
             className="object-cover object-center w-full h-full"
-            loading="lazy"
+            loading="eager"
           />
         </Background>
       </Parallax>
