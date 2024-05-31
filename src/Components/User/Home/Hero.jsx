@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 
 const Hero = () => {
   const [carousel, setCarousel] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
     await axios
@@ -18,7 +19,12 @@ const Hero = () => {
       })
       .catch((error) => toast.error(error.response.data.message));
   };
+
   useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, fetchData());
     fetchData();
   }, []);
 
