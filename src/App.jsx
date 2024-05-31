@@ -29,20 +29,25 @@ import EditService from "./Components/Admin/Servic/EditService";
 import ListAbout from "./Components/Admin/About/Details/ListAbout";
 import AddDetails from "./Components/Admin/About/Details/AddDetails";
 import EditDetails from "./Components/Admin/About/Details/EditDetails";
+import { LoadingProvider, useLoading } from "./Components/User/Context/LoadingContext";
+import { useEffect } from "react";
+import Loader from "./Components/Loader/Loader";
 
 const App = () => {
   return (
     <div>
-        <Routes>
-          <Route path="/" element={<Navbar />}>
-            <Route index element={<HomePage />} />
-            <Route path="about" element={<AboutPage />} />
-            <Route path="service" element={<ServicePage />} />
-            <Route path="wedding" element={<WeddingPage />} />
-            <Route path="details/:weddingId" element={<DetailsPage />} />
-            <Route path="contact" element={<ContactPage />} />
-          </Route>
-        </Routes>
+        <LoadingProvider>
+      <Routes>
+        <Route path="/" element={<Navbar />}>
+          <Route index element={<LoadingWrapper component={<HomePage />} />} />
+          <Route path="about" element={<LoadingWrapper component={<AboutPage />} />} />
+          <Route path="service" element={<LoadingWrapper component={<ServicePage />} />} />
+          <Route path="wedding" element={<LoadingWrapper component={<WeddingPage />} />} />
+          <Route path="details/:weddingId" element={<LoadingWrapper component={<DetailsPage />} />} />
+          <Route path="contact" element={<LoadingWrapper component={<ContactPage />} />} />
+        </Route>
+      </Routes>
+    </LoadingProvider>
 
       {/* admin */}
       <AuthContextProvider>
@@ -89,6 +94,22 @@ const App = () => {
       />
     </div>
   );
+};
+
+const LoadingWrapper = ({ component }) => {
+  const { loading, setLoading } = useLoading();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000); 
+  }, [setLoading]);
+
+  if (loading) {
+    return <div className="flex justify-center items-center h-screen"><Loader /></div>;
+  }
+
+  return component;
 };
 
 export default App;
