@@ -1,25 +1,25 @@
-import { Background, Parallax } from "react-parallax";
+import { Parallax } from "react-parallax";
 
 const HeroContent = ({ images }) => {
   return (
     <div>
       <Parallax
+        bgImage={`http://localhost:2000/uploads/${images}`}
         strength={200}
-        style={{
-          minHeight: "100vh",
-          height: "auto",
+        bgImageStyle={{
+          objectFit: "cover",
+          objectPosition: "center",
           width: "100%",
+          height: "100vh",
         }}
-      >
-        <Background className="custom-bg w-screen h-screen">
-          <img
-            src={`https://reelman-back.onrender.com/uploads/${images}`}
-            alt="Hero images"
-            className="object-cover object-center w-full h-full"
-            loading="lazy"
-          />
-        </Background>
-      </Parallax>
+        style={{
+          height: "100vh",
+          width: "100vw",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      ></Parallax>
     </div>
   );
 };
