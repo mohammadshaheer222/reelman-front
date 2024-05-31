@@ -19,6 +19,10 @@ const Wedding = () => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, fetchData());
     fetchData();
   }, []);
 

@@ -18,6 +18,10 @@ const WeddingMid = () => {
       .catch((error) => console.log(error));
   };
   useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, fetchData());
     fetchData();
   }, []);
 

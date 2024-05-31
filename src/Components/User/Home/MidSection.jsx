@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const MidSection = () => {
   const [carousel, setCarousel] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
     await axios
@@ -18,6 +19,10 @@ const MidSection = () => {
   };
 
   useState(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, fetchData());
     fetchData();
   }, []);
 
