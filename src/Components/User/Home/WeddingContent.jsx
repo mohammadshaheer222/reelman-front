@@ -16,8 +16,9 @@ const WeddingContent = ({ wedding }) => {
         <p></p>
         <p className="capitalize font-medium text-xl py-2 ">
           "{wedding.quote}-" <br />
-          <span className="text-gray-700">{wedding.groom} and {wedding.bride}</span>
-          
+          <span className="text-gray-700">
+            {wedding.groom} and {wedding.bride}
+          </span>
         </p>
       </Link>
     </div>

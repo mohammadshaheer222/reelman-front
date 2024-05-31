@@ -7,15 +7,12 @@ import "slick-carousel/slick/slick-theme.css";
 
 const MidSection = () => {
   const [carousel, setCarousel] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
-    setIsLoading(true);
     await axios
       .get(`${server}/get-mid`)
       .then((res) => {
         setCarousel(res.data.avatar);
-        setIsLoading(false);
       })
       .catch((error) => console.log(error));
   };
