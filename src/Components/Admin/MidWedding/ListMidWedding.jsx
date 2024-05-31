@@ -4,12 +4,12 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const ListWedding = () => {
+const ListMidWedding = () => {
   const [weddingData, setWeddingData] = useState([]);
 
   const fetchData = async () => {
     await axios
-      .get(`${server}/get-wedding`, {
+      .get(`${server}/get-wedding-mid`, {
         withCredentials: true,
       })
       .then((res) => setWeddingData(res.data.wedding))
@@ -24,7 +24,7 @@ const ListWedding = () => {
 
   const handleDelete = async (id) => {
     await axios
-      .delete(`${server}/delete-wedding/${id}`)
+      .delete(`${server}/delete-wedding-mid/${id}`)
       .then((res) => {
         alert("Are you want to delete this wedding?");
         fetchData();
@@ -34,15 +34,16 @@ const ListWedding = () => {
 
   return (
     <div className="py-20 h-screen overflow-auto px-4 md:px-2 text-center space-y-4">
-      <Link to="/reelman-admin/add-wedding">
-        <button className="bg-blue-500 text-white px-6 py-2 active:scale-95 active:shadow-lg duration-100">
-          Add Wedding
-        </button>
-      </Link>
+      {weddingData.length < 3 && (
+        <Link to="/reelman-admin/add-wedding-mid">
+          <button className="bg-blue-500 text-white px-6 py-2 active:scale-95 active:shadow-lg duration-100">
+            Add Wedding
+          </button>
+        </Link>
+      )}
       <table className="w-full mx-auto">
         <thead>
           <tr className="text-start py-12 bg-black text-white">
-            <th className="p-2 border-2">Profile (Image)</th>
             <th className="p-2 border-2">Profile (Gif)</th>
             <th className="p-2 border-2">Cover</th>
             <th className="p-2 border-2">Images</th>
@@ -55,26 +56,14 @@ const ListWedding = () => {
         </thead>
         <tbody>
           {weddingData.map((data) => (
-            <tr key={data._id} rs>
+            <tr key={data._id}>
               <td className="p-4 border border-black">
-                {data.profile && (
-                  <img
-                    src={`https://reelman-back.onrender.com/uploads/${data.profile}`}
-                    alt="profile image"
-                    width={50}
-                    loading="lazy"
-                  />
-                )}
-              </td>
-              <td className="p-4 border border-black">
-                {data.gif && (
-                  <img
-                    src={`https://reelman-back.onrender.com/uploads/${data.gif}`}
-                    alt="profile image"
-                    width={50}
-                    loading="lazy"
-                  />
-                )}
+                <img
+                  src={`https://reelman-back.onrender.com/uploads/${data.profile}`}
+                  alt="profile image"
+                  width={50}
+                  loading="lazy"
+                />
               </td>
               <td className="p-4 border border-black">
                 <img
@@ -99,7 +88,7 @@ const ListWedding = () => {
               <td className="p-4 border border-black">
                 <div className="flex justify-center items-center gap-2 p-4 ">
                   <Link
-                    to={`/reelman-admin/edit-wedding/${data._id}`}
+                    to={`/reelman-admin/edit-wedding-mid/${data._id}`}
                     className="bg-blue-500 text-white px-6 py-1 cursor-pointer active:scale-95 active:shadow-lg duration-100"
                   >
                     Edit
@@ -120,4 +109,4 @@ const ListWedding = () => {
   );
 };
 
-export default ListWedding;
+export default ListMidWedding;

@@ -52,6 +52,15 @@ const Sidebar = ({ isOpen, closeMenu }) => {
               </button>
             </Link>
           </div>
+           
+          <div>
+            <Link to="/reelman-admin/list-wedding-mid" onClick={closeMenu}>
+              <button className="flex items-center gap-x-2 focus:outline-none">
+                <MdHome />
+                Wedding middle
+              </button>
+            </Link>
+          </div>
 
           <div>
             <Link to="/reelman-admin/list-insta" onClick={closeMenu}>

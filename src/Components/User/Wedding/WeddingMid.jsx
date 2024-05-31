@@ -18,10 +18,6 @@ const WeddingMid = () => {
       .catch((error) => console.log(error));
   };
   useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, fetchData());
     fetchData();
   }, []);
 
@@ -30,7 +26,11 @@ const WeddingMid = () => {
       <h1 className="heading pb-4">Wedding Stories</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 h-full gap-4">
         {wedding.map((wedding, index) => (
-          <WeddingContent key={index} wedding={wedding} />
+          <>
+            {wedding.profile && (
+              <WeddingContent key={index} wedding={wedding} />
+            )}
+          </>
         ))}
       </div>
     </div>

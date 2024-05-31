@@ -12,19 +12,16 @@ const Hero = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
+    setIsLoading(true);
     await axios
       .get(`${server}/get-slide`)
       .then((res) => {
         setCarousel(res.data.avatar);
+        setIsLoading(false);
       })
       .catch((error) => toast.error(error.response.data.message));
   };
-
   useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, fetchData());
     fetchData();
   }, []);
 
@@ -35,8 +32,8 @@ const Hero = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
-    // autoplay: true,
-    // autoplaySpeed: 6000,
+    autoplay: true,
+    autoplaySpeed: 6000,
   };
 
   return (

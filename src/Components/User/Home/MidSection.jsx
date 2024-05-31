@@ -10,19 +10,17 @@ const MidSection = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
+    setIsLoading(true);
     await axios
       .get(`${server}/get-mid`)
       .then((res) => {
         setCarousel(res.data.avatar);
+        setIsLoading(false);
       })
       .catch((error) => console.log(error));
   };
 
   useState(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, fetchData());
     fetchData();
   }, []);
 
@@ -41,7 +39,7 @@ const MidSection = () => {
     <div className="py-4">
       <Slider {...settings}>
         {carousel.map((images) => (
-          <div className="h-screen w-screen" key={images._id}>
+          <div className="h-[90vh] w-screen" key={images._id}>
             <img
               src={`https://reelman-back.onrender.com/uploads/${images.midAvatar}`}
               alt="reelman photos"

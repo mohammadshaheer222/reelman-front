@@ -1,20 +1,42 @@
 import axios from "axios";
-import { useState } from "react";
-import { RxAvatar } from "react-icons/rx";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { server } from "../../../../Server";
+import { RxAvatar } from "react-icons/rx";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
-const Wedding = () => {
+const EditMidWedding = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [groom, setGroom] = useState("");
   const [bride, setBride] = useState("");
   const [quote, setQuote] = useState("");
   const [description, setDescription] = useState("");
-  const [weddingAvatar, setWeddingAvatar] = useState([]);
   const [profileAvatar, setProfileAvatar] = useState(null);
   const [coverAvatar, setCoverAvatar] = useState(null);
+  const [weddingAvatar, setWeddingAvatar] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const fetchSingleData = async () => {
+    await axios
+      .get(`${server}/single-wedding-mid/${id}`)
+      .then((res) => {
+        setGroom(res.data.wedding.groom);
+        setBride(res.data.wedding.bride);
+        setQuote(res.data.wedding.quote);
+        setDescription(res.data.wedding.description);
+        setWeddingAvatar(res.data.wedding.weddingAvatar);
+        setProfileAvatar(res.data.wedding.profile);
+        setCoverAvatar(res.data.wedding.cover);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchSingleData();
+  }, []);
 
   const handleProfileChange = (event) => {
     const file = event.target.files[0];
@@ -22,12 +44,13 @@ const Wedding = () => {
   };
 
   const handleCoverChange = (event) => {
-    setCoverAvatar(event.target.files[0]);
+    const file = event.target.files[0];
+    setCoverAvatar(file);
   };
 
   const handleFileInputChange = (event) => {
-    const files = event.target.files;
-    const fileArr = Array.from(files);
+    const file = event.target.files;
+    const fileArr = Array.from(file);
     setWeddingAvatar((prev) => [...prev, ...fileArr]);
   };
 
@@ -58,11 +81,11 @@ const Wedding = () => {
     newForm.append("cover-avatar", coverAvatar);
 
     await axios
-      .post(`${server}/create-wedding`, newForm, config)
+      .patch(`${server}/update-wedding-mid/${id}`, newForm, config)
       .then((res) => {
         setIsLoading(false);
-        toast.success("Upload Successfully!!");
-        navigate("/reelman-admin/list-wedding");
+        toast.success("Updated Successfully!!");
+        navigate("/reelman-admin/list-wedding-mid");
       })
       .catch((error) => toast.error(error.response.data.message));
   };
@@ -78,7 +101,7 @@ const Wedding = () => {
             Groom
           </label>
           <input
-            className=" outline-none px-4 py-1"
+            className="bg-gray-100 outline-none px-4 py-1"
             type="text"
             onChange={(event) => setGroom(event.target.value)}
             name="groom"
@@ -92,7 +115,7 @@ const Wedding = () => {
             Bride
           </label>
           <input
-            className=" outline-none px-4 py-1"
+            className="bg-gray-100 outline-none px-4 py-1"
             type="text"
             onChange={(event) => setBride(event.target.value)}
             name="bride"
@@ -106,7 +129,7 @@ const Wedding = () => {
             Quote
           </label>
           <input
-            className=" outline-none px-4 py-1"
+            className="bg-gray-100 outline-none px-4 py-1"
             type="text"
             onChange={(event) => setQuote(event.target.value)}
             name="quote"
@@ -119,7 +142,7 @@ const Wedding = () => {
             Description
           </label>
           <input
-            className=" outline-none px-4 py-1"
+            className="bg-gray-100 outline-none px-4 py-1"
             type="text"
             onChange={(event) => setDescription(event.target.value)}
             name="description"
@@ -127,37 +150,40 @@ const Wedding = () => {
             value={description}
           />
         </div>
-
         <div className="flex justify-center items-center gap-6">
-            <div className="mt-2 flex flex-col items-center ">
-              <label
-                className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300  shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 active:scale-95 active:shadow-lg duration-100"
-                htmlFor="profile-avatar"
-              >
-                <span className="text-center">Upload Your Profile Photo</span>
-                <input
-                  type="file"
-                  name="profile-avatar"
-                  id="profile-avatar"
-                  accept=".jpg,.jpeg,.heic,.png"
-                  onChange={handleProfileChange}
-                  className="sr-only"
-                  required
+          <div className="mt-2 flex flex-col items-center ">
+            <label
+              className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300  shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 active:scale-95 active:shadow-lg duration-100"
+              htmlFor="profile-avatar"
+            >
+              <span className="text-center">Upload Your Profile Photo</span>
+              <input
+                type="file"
+                name="profile-avatar"
+                id="profile-avatar"
+                accept=".jpg,.jpeg,.heic,.png"
+                onChange={handleProfileChange}
+                className="sr-only"
+              />
+            </label>
+            <div className="pt-6 flex gap-4 flex-wrap justify-center items-center">
+              {profileAvatar ? (
+                <img
+                  className="h-24 w-24 object-cover"
+                  src={
+                    profileAvatar instanceof File
+                      ? URL.createObjectURL(profileAvatar)
+                      : `https://reelman-back.onrender.com/uploads/${profileAvatar}`
+                  }
+                  alt="Profile Avatar"
                 />
-              </label>
-              <div className="pt-6 flex gap-4 flex-wrap justify-center items-center">
-                {profileAvatar ? (
-                  <img
-                    className="h-24 w-24 object-cover"
-                    src={URL.createObjectURL(profileAvatar)}
-                    alt=""
-                    loading="lazy"
-                  />
-                ) : (
-                  <RxAvatar className="h-24 w-24 text-gray-400" />
-                )}
-              </div>
+              ) : (
+                <RxAvatar className="h-24 w-24 text-gray-300" />
+              )}
             </div>
+          </div>
+
+          
 
           <div className="mt-2 flex flex-col items-center">
             <label
@@ -172,19 +198,21 @@ const Wedding = () => {
                 accept=".jpg,.jpeg,.heic,.png"
                 onChange={handleCoverChange}
                 className="sr-only"
-                required
               />
             </label>
             <div className="pt-6 flex gap-4 flex-wrap justify-center items-center">
               {coverAvatar ? (
                 <img
                   className="h-24 w-24 object-cover"
-                  src={URL.createObjectURL(coverAvatar)}
-                  alt=""
-                  loading="lazy"
+                  src={
+                    coverAvatar instanceof File
+                      ? URL.createObjectURL(coverAvatar)
+                      : `https://reelman-back.onrender.com/uploads/${coverAvatar}`
+                  }
+                  alt="Cover Avatar"
                 />
               ) : (
-                <RxAvatar className="h-24 w-24 text-gray-400" />
+                <RxAvatar className="h-24 w-24 text-gray-300" />
               )}
             </div>
           </div>
@@ -204,45 +232,43 @@ const Wedding = () => {
               onChange={handleFileInputChange}
               className="sr-only"
               multiple
-              required
             />
           </label>
           <div className="pt-6 flex gap-4 flex-wrap justify-center items-center">
-            {weddingAvatar.slice(0, 5).map((avatar, index) => (
-              <div className="flex flex-col gap-2">
-                <span
-                  key={index}
-                  className="inline-block h-24 w-24 overflow-hidden"
-                >
+            {weddingAvatar.map((avatar, index) => (
+              <div key={index} className="flex flex-col gap-2">
+                <span className="inline-block h-24 w-24 overflow-hidden">
                   <img
                     className="h-full w-full object-cover"
                     alt={`avatar-${index}`}
-                    src={URL.createObjectURL(avatar)}
-                    loading="lazy"
+                    src={
+                      avatar instanceof File
+                        ? URL.createObjectURL(avatar)
+                        : `https://reelman-back.onrender.com/uploads/${avatar}`
+                    }
                   />
                 </span>
                 <button
                   type="button"
+                  className="bg-red-500 text-white active:scale-95 active:shadow-lg duration-100"
                   onClick={() => handleDelete(index)}
-                  className="bg-red-500 text-white active:scale-95 active:shadow-lg duration-100 cursor-pointer"
                 >
                   Delete
                 </button>
               </div>
             ))}
             {weddingAvatar.length === 0 && (
-              <RxAvatar className="h-24 w-24 text-gray-400" />
+              <RxAvatar className="h-24 w-24 text-gray-300" />
             )}
           </div>
         </div>
         <input
           type="submit"
-          value={isLoading ? "Submitting..." : "Submit"}
+          value={isLoading ? "Updating.." : "Update"}
           className="bg-blue-500 text-white w-full py-1 cursor-pointer hover:bg-blue-600 active:bg-blue-400 active:scale-95 active:shadow-lg duration-100"
         />
       </form>
     </div>
   );
 };
-
-export default Wedding;
+export default EditMidWedding;

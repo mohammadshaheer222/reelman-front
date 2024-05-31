@@ -6,7 +6,6 @@ import { server } from "../../../../Server";
 
 const About = () => {
   const [details, setDetails] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const fetchData = async () => {
     await axios
       .get(`${server}/get-details`)
@@ -15,10 +14,6 @@ const About = () => {
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, fetchData());
     fetchData();
   }, []);
 

@@ -1,6 +1,9 @@
+import { useState } from "react";
 import Slider from "react-slick";
 
 const Review = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -37,14 +40,16 @@ const Review = () => {
   ];
   return (
     <div className="py-4 px-8">
-      <Slider {...settings}>
-        {reviews.map((review, index) => (
-          <div className="text-center space-y-4" key={index}>
-            <h1 className="text-lg">{review.message}</h1>
-            <h1 className="italic font-light">-{review.name}</h1>
-          </div>
-        ))}
-      </Slider>
+      {isLoading ? (
+        <Slider {...settings}>
+          {reviews.map((review, index) => (
+            <div className="text-center space-y-4" key={index}>
+              <h1 className="text-lg">{review.message}</h1>
+              <h1 className="italic font-light">-{review.name}</h1>
+            </div>
+          ))}
+        </Slider>
+      ) : null}
     </div>
   );
 };

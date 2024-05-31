@@ -8,28 +8,23 @@ const Wedding = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
     await axios
       .get(`${server}/latest-wedding`)
       .then((res) => {
         setLatestWedding(res.data.latestWedding);
-        setIsLoading(false);
+        // setIsLoading(false);
       })
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, fetchData());
     fetchData();
   }, []);
 
   return (
     <div className="px-8 w-full h-full ">
-      {latestWedding.length > 0 && <h1 className="heading pb-4">Wedding Stories</h1>}
-
+      {isLoading ? <h1 className="heading pb-4">Wedding Stories</h1> : null}
       <div className="flex justify-center items-center ">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 h-full w-full gap-4 ">
           {latestWedding.map((wedding, index) => (

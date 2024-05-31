@@ -5,7 +5,7 @@ import { server } from "../../../../Server";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const Wedding = () => {
+const AddMidWedding = () => {
   const navigate = useNavigate();
   const [groom, setGroom] = useState("");
   const [bride, setBride] = useState("");
@@ -58,11 +58,11 @@ const Wedding = () => {
     newForm.append("cover-avatar", coverAvatar);
 
     await axios
-      .post(`${server}/create-wedding`, newForm, config)
+      .post(`${server}/create-wedding-mid`, newForm, config)
       .then((res) => {
         setIsLoading(false);
         toast.success("Upload Successfully!!");
-        navigate("/reelman-admin/list-wedding");
+        navigate("/reelman-admin/list-wedding-mid");
       })
       .catch((error) => toast.error(error.response.data.message));
   };
@@ -245,4 +245,4 @@ const Wedding = () => {
   );
 };
 
-export default Wedding;
+export default AddMidWedding;

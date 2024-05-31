@@ -23,52 +23,31 @@ import ServicePage from "./Pages/UserPage/ServicePage";
 import AuthContextProvider from "./Components/Admin/Context/AuthContext";
 import PrivateRoute from "./Components/Admin/PrivateRoute";
 import AboutPage from "./Pages/UserPage/AboutPage";
-import ListService from "./Components/Admin/Servic/ListService";
-import AddService from "./Components/Admin/Servic/AddService";
-import EditService from "./Components/Admin/Servic/EditService";
+import ListService from "./Components/Admin/Service/ListService";
+import AddService from "./Components/Admin/Service/AddService";
+import EditService from "./Components/Admin/Service/EditService";
 import ListAbout from "./Components/Admin/About/Details/ListAbout";
 import AddDetails from "./Components/Admin/About/Details/AddDetails";
 import EditDetails from "./Components/Admin/About/Details/EditDetails";
-import {
-  LoadingProvider,
-  useLoading,
-} from "./Components/User/Context/LoadingContext";
-import { useEffect } from "react";
-import Loader from "./Components/Loader/Loader";
+import ListMidWedding from "./Components/Admin/MidWedding/ListMidWedding";
+import AddMidWedding from "./Components/Admin/MidWedding/AddMidWedding";
+import DetailsMidPage from "./Pages/UserPage/DetailsMidPage";
+import EditMidWedding from "./Components/Admin/MidWedding/EditMidWedding";
 
 const App = () => {
   return (
     <div>
-      <LoadingProvider>
-        <Routes>
-          <Route path="/" element={<Navbar />}>
-            <Route
-              index
-              element={<LoadingWrapper component={<HomePage />} />}
-            />
-            <Route
-              path="about"
-              element={<LoadingWrapper component={<AboutPage />} />}
-            />
-            <Route
-              path="service"
-              element={<LoadingWrapper component={<ServicePage />} />}
-            />
-            <Route
-              path="wedding"
-              element={<LoadingWrapper component={<WeddingPage />} />}
-            />
-            <Route
-              path="details/:weddingId"
-              element={<LoadingWrapper component={<DetailsPage />} />}
-            />
-            <Route
-              path="contact"
-              element={<LoadingWrapper component={<ContactPage />} />}
-            />
-          </Route>
-        </Routes>
-      </LoadingProvider>
+      <Routes>
+        <Route path="/" element={<Navbar />}>
+          <Route index element={<HomePage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="service" element={<ServicePage />} />
+          <Route path="wedding" element={<WeddingPage />} />
+          <Route path="details/:weddingId" element={<DetailsPage />} />
+          <Route path="details-mid/:weddingId" element={<DetailsMidPage />} />
+          <Route path="contact" element={<ContactPage />} />
+        </Route>
+      </Routes>
 
       {/* admin */}
       <AuthContextProvider>
@@ -89,6 +68,9 @@ const App = () => {
               <Route path="list-about" element={<ListAbout />} />
               <Route path="add-about" element={<AddDetails />} />
               <Route path="edit-about/:id" element={<EditDetails />} />
+              <Route path="edit-wedding-mid/:id" element={<EditMidWedding />} />
+              <Route path="list-wedding-mid" element={<ListMidWedding />} />
+              <Route path="add-wedding-mid" element={<AddMidWedding />} />
             </Route>
           </Route>
           <Route path="/login" element={<LoginPage />} />
@@ -115,26 +97,6 @@ const App = () => {
       />
     </div>
   );
-};
-
-const LoadingWrapper = ({ component }) => {
-  const { loading, setLoading } = useLoading();
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, [setLoading]);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        Loading...
-      </div>
-    );
-  }
-
-  return component;
 };
 
 export default App;

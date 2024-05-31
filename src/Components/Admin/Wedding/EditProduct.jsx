@@ -13,6 +13,7 @@ const EditProduct = () => {
   const [quote, setQuote] = useState("");
   const [description, setDescription] = useState("");
   const [profileAvatar, setProfileAvatar] = useState(null);
+  const [gifAvatar, setGifAvatar] = useState(null);
   const [coverAvatar, setCoverAvatar] = useState(null);
   const [weddingAvatar, setWeddingAvatar] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,6 +28,7 @@ const EditProduct = () => {
         setDescription(res.data.wedding.description);
         setWeddingAvatar(res.data.wedding.weddingAvatar);
         setProfileAvatar(res.data.wedding.profile);
+        setGifAvatar(res.data.wedding.gif);
         setCoverAvatar(res.data.wedding.cover);
       })
       .catch((error) => {
@@ -41,6 +43,10 @@ const EditProduct = () => {
   const handleProfileChange = (event) => {
     const file = event.target.files[0];
     setProfileAvatar(file);
+  };
+  const handleGifAvatar = (event) => {
+    const file = event.target.files[0];
+    setGifAvatar(file);
   };
 
   const handleCoverChange = (event) => {
@@ -82,6 +88,7 @@ const EditProduct = () => {
     newForm.append("quote", quote);
     newForm.append("description", description);
     newForm.append("profile-avatar", profileAvatar);
+    newForm.append("gif-avatar", gifAvatar);
     newForm.append("cover-avatar", coverAvatar);
 
     await axios
@@ -187,6 +194,38 @@ const EditProduct = () => {
             </div>
           </div>
 
+          <div className="mt-2 flex flex-col items-center ">
+            <label
+              className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300  shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 active:scale-95 active:shadow-lg duration-100"
+              htmlFor="gif-avatar"
+            >
+              <span className="text-center">Upload Your Profile Photo</span>
+              <input
+                type="file"
+                name="gif-avatar"
+                id="gif-avatar"
+                accept=".jpg,.jpeg,.heic,.png"
+                onChange={handleGifAvatar}
+                className="sr-only"
+              />
+            </label>
+            <div className="pt-6 flex gap-4 flex-wrap justify-center items-center">
+              {gifAvatar ? (
+                <img
+                  className="h-24 w-24 object-cover"
+                  src={
+                    profileAvatar instanceof File
+                      ? URL.createObjectURL(gifAvatar)
+                      : `https://reelman-back.onrender.com/uploads/${gifAvatar}`
+                  }
+                  alt="gif Avatar"
+                />
+              ) : (
+                <RxAvatar className="h-24 w-24 text-gray-300" />
+              )}
+            </div>
+          </div>
+
           <div className="mt-2 flex flex-col items-center">
             <label
               className="flex cursor-pointer items-center justify-center px-4 py-2 border border-gray-300  shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 active:scale-95 active:shadow-lg duration-100"
@@ -246,7 +285,7 @@ const EditProduct = () => {
                     src={
                       avatar instanceof File
                         ? URL.createObjectURL(avatar)
-                        : `https://reelman-back.onrender.com0/uploads/${avatar}`
+                        : `https://reelman-back.onrender.com/uploads/${avatar}`
                     }
                   />
                 </span>

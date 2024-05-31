@@ -11,16 +11,7 @@ import { server } from "../../../../Server";
 
 const Instagram = () => {
   const [data, setData] = useState([]);
-  const carousel = [
-    { images: parallax },
-    { images: wedding4 },
-    { images: wedding3 },
-    { images: insta1 },
-    { images: wedding2 },
-    { images: image3 },
-    { images: wedding3 },
-    { images: insta1 },
-  ];
+  const [isLoading, setIsLoading] = useState(false)
 
   const fetchData = async () => {
     await axios
@@ -35,7 +26,8 @@ const Instagram = () => {
 
   return (
     <div className="px-8">
-      <h1 className="heading pb-2">Instagram</h1>
+      {isLoading ? <h1 className="heading pb-4">Instagram</h1> :  null}
+      {/* <h1 className="heading pb-2">Instagram</h1> */}
       <div className="flex justify-center items-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 h-full w-full  pt-2 gap-4 ">
           {data.map((data) => (
