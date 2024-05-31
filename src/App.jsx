@@ -108,7 +108,7 @@ const LoadingWrapper = ({ component }) => {
   }, [setLoading]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="flex justify-center items-center h-screen">Loading...</div>;
   }
 
   return component;
