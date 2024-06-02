@@ -24,17 +24,16 @@ const Wedding = () => {
 
   return (
     <div className="px-8 w-full h-full ">
-      {isLoading ? (
+      {latestWedding.length > 0 && (
         <h1 className="heading pb-4">Wedding Stories</h1>
-      ) : (
-        <div className="flex justify-center items-center ">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 h-full w-full gap-4 ">
-            {latestWedding.map((wedding, index) => (
-              <WeddingContent key={index} wedding={wedding} />
-            ))}
-          </div>
-        </div>
       )}
+      <div className="flex justify-center items-center ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 h-full w-full gap-4 ">
+          {latestWedding.map((wedding, index) => (
+            <WeddingContent key={index} wedding={wedding} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
